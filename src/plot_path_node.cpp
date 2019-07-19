@@ -12,6 +12,7 @@
 nav_msgs::Path path_output;
 
 ros::Subscriber* p_pose_sub;
+
 ros::Publisher* p_path_pub;
 
 
@@ -57,7 +58,7 @@ int main(int argc, char** argv)
     p_path_pub = new ros::Publisher(nh.advertise<nav_msgs::Path>(path_output_topic_name, 1));
 
     std::cout << "\033[32m" << "Start plotting path!"
-              << "\033[0m"  << std::endl;
+              << "\033[0m" << std::endl;
     ros::spin();
 
 
