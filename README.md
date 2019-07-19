@@ -7,7 +7,7 @@
 1. rosrun the plot_path node.
 
    ```shell
-   rosrun plot_path plot_path_node /topic_name (/path_output_topic_name)
+   rosrun plot_path plot_path_node /pose_input_topic_name (/path_output_topic_name)
    ```
 
    The default  `path_output_topic_name`  is /plotted_path.
