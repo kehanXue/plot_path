@@ -60,6 +60,7 @@ int main(int argc, char** argv)
     p_pose_sub = new ros::Subscriber(nh.subscribe<geometry_msgs::PoseStamped>(pose_input_topic_name, 1, pose_cb));
     p_path_pub = new ros::Publisher(nh.advertise<nav_msgs::Path>(path_output_topic_name, 1));
 
+    // TODO Add NONE POSE MESSAGE check
     std::cout << "\033[32m" << "Start plotting path!\n" << "You can display in rviz now!"
               << "\033[0m" << std::endl;
     ros::spin();
