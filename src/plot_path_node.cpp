@@ -22,6 +22,8 @@ void pose_cb(const geometry_msgs::PoseStamped::ConstPtr &msg)
     path_output.header.frame_id = msg->header.frame_id;
     path_output.poses.push_back(*msg);
 
+    // ROS_INFO("Publish one message!");
+
     p_path_pub->publish(path_output);
 }
 
@@ -35,6 +37,7 @@ int main(int argc, char** argv)
     if (argc == 1 || argc > 3)
     {
         ROS_ERROR("Usage: rosrun plot_path plot_path_node /pose_input_topic_name (/path_output_topic_name) !");
+        return -1;
     }
     else if (argc == 2)
     {
@@ -57,7 +60,7 @@ int main(int argc, char** argv)
     p_pose_sub = new ros::Subscriber(nh.subscribe<geometry_msgs::PoseStamped>(pose_input_topic_name, 1, pose_cb));
     p_path_pub = new ros::Publisher(nh.advertise<nav_msgs::Path>(path_output_topic_name, 1));
 
-    std::cout << "\033[32m" << "Start plotting path!"
+    std::cout << "\033[32m" << "Start plotting path!\n" << "You can display in rviz now!"
               << "\033[0m" << std::endl;
     ros::spin();
 
