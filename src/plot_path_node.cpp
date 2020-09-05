@@ -15,11 +15,19 @@ ros::Subscriber* p_pose_sub;
 
 ros::Publisher* p_path_pub;
 
+std::string output_frame;
 
 void pose_cb(const geometry_msgs::PoseStamped::ConstPtr &msg)
 {
     path_output.header.stamp = msg->header.stamp;
-    path_output.header.frame_id = msg->header.frame_id;
+    if (!output_frame.empty())
+    {
+        path_output.header.frame_id = output_frame;
+    }
+    else
+    {
+        path_output.header.frame_id = msg->header.frame_id;
+    }
     path_output.poses.push_back(*msg);
 
     // ROS_INFO("Publish one message!");
@@ -34,7 +42,7 @@ int main(int argc, char** argv)
     std::string pose_input_topic_name;
     std::string path_output_topic_name;
 
-    if (argc == 1 || argc > 3)
+    if (argc == 1 || argc > 4)
     {
         ROS_ERROR("Usage: rosrun plot_path plot_path_node /pose_input_topic_name (/path_output_topic_name) !");
         return -1;
@@ -52,6 +60,15 @@ int main(int argc, char** argv)
         path_output_topic_name = std::string(argv[2]);
         ROS_INFO("Use pose input  topic name: %s", pose_input_topic_name.c_str());
         ROS_INFO("Use path output topic name: %s", path_output_topic_name.c_str());
+    }
+    else if (argc == 4)
+    {
+        pose_input_topic_name = std::string(argv[1]);
+        path_output_topic_name = std::string(argv[2]);
+        output_frame = std::string(argv[3]);
+        ROS_INFO("Use pose input  topic name: %s", pose_input_topic_name.c_str());
+        ROS_INFO("Use path output topic name: %s", path_output_topic_name.c_str());
+        ROS_INFO("Use path output frame name: %s", output_frame.c_str());
     }
 
     ros::init(argc, argv, "plot_path_node");
