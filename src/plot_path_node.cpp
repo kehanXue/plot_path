@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     else if (argc == 3)
     {
         pose_input_topic_name = std::string(argv[1]);
-        pose_input_topic_name = std::string(argv[2]);
+        path_output_topic_name = std::string(argv[2]);
         ROS_INFO("Use pose input  topic name: %s", pose_input_topic_name.c_str());
         ROS_INFO("Use path output topic name: %s", path_output_topic_name.c_str());
     }
