@@ -13,7 +13,3 @@
    The default  `path_output_topic_name`  is /plotted_path, and the default `output_path_frame_id` is same as the frame_id of the input topic.
 
 2. Then launch the rviz, create the **Path** visualization(click the `Add` button left down.). Then you will see the path shows in the rviz!
-
-
-
-@author Kehan Xue
